@@ -10,7 +10,8 @@ class Entidade extends Model
         'id',
         'tipo',
         'nome',
-        'ativo'
+        'ativo',
+        'empresa_id'
     ];
     protected $table = 'entidade';
 }

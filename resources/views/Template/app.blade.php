@@ -21,25 +21,24 @@
         <!--menu -->
         <div class="menu">
             <div class="nav-side-menu">
-                <div class="brand">Menu</div>
+                <div class="brand"></div>
                 <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
                 <div class="menu-list">
                     <ul id="menu-content" class="menu-content collapse out">
                         <li>
-                            <a href="#">
-                                <i class="fa fa-dashboard fa-lg"></i> Administração
-                            </a>
+                            <a href="#">Administração</a>
                         </li>
                         <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                            <a href="#"><i class="fa fa-gift fa-lg"></i>Cadastros <span class="arrow"></span></a>
+                            <a href="#"></i>Cadastros <span class="arrow"></span></a>
                         </li>
                         <ul class="sub-menu collapse" id="products">
                             <li class="active"><a href= {{url('produto')}} >Produtos</a></li>
                             <li><a href= {{url('entidade')}}>Entidade</a></li>
                             <li><a href= {{url('movimentacao')}}>Movimentação</a></li>
+                            <li><a href= {{url('empresa')}}>Empresa</a></li>
                         </ul>
                         <li data-toggle="collapse" data-target="#service" class="collapsed">
-                            <a href="#"><i class="fa fa-globe fa-lg"></i> Relatórios <span class="arrow"></span></a>
+                            <a href="#">Relatórios <span class="arrow"></span></a>
                         </li>
                         <ul class="sub-menu collapse" id="service">
                             <li>Produto</li>

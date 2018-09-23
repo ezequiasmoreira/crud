@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Entidade;
+use App\Empresa;
 use Illuminate\Http\Request;
 
 class EntidadeController extends Controller
@@ -14,20 +15,27 @@ class EntidadeController extends Controller
 
     public function index(){
         $list_entidades = Entidade::all();
+        $list_empresas = Empresa::all();
         return view('entidade.index', [
-            'entidades' => $list_entidades
+            'entidades' => $list_entidades,
+            'empresas' => $list_empresas
         ]);
     }
     public function novoView(){
-        return view('entidade.create');
+        $list_empresas = Empresa::all();
+        return view('entidade.create',[
+            'empresas' => $list_empresas
+        ]);
     }
     public function salvar(Request $request){
         $entidade = Entidade::create($request->all());
         return redirect("/entidade")->with("message", "Entidade criada com sucesso!");
     }
     public function editarView($id) {
+        $list_empresas = Empresa::all();
         return view('entidade.edit', [
-            'entidade' => $this->getEntidade($id)
+            'entidade' => $this->getEntidade($id),
+            'empresas' => $list_empresas
         ]);
     }
     public function atualizar(Request $request){

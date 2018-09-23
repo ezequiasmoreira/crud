@@ -19,10 +19,17 @@
             <tbody>
                 <?php foreach ($entidades as $entidade){?>
                 <tr>
-                    <td><?php echo $entidade->id ?></td>
+                    <td align="center"><?php echo ($entidade->id) ?></td>
                     <td>{{ ($entidade->tipo =='F')?"Fornecedor":"Cliente" }}</td>
-                    <td align="center"><?php echo $entidade->nome ?></td>
+                    <?php
+                        foreach ($empresas as $empresa){
+                            if ($empresa->id ==$entidade->empresa_id){
+                                echo("<td>$empresa->razao_social</td>");
+                            }
+                        }
+                    ?>
                     <td align="center"><?php echo ($entidade->ativo=='S')?"Ativo":"Inativo" ?></td>
+
                     <td align="center">
                         <a href= {{url('entidade/'.$entidade->id.'/editar')}} class="btn editar">Editar</a>
                     </td>

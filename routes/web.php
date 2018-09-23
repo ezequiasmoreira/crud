@@ -28,5 +28,13 @@ Route::group(["prefix" => "movimentacao"], function () {
     Route::post("/salvar", "MovimentacaoController@salvar");
     Route::post("/atualizar", "MovimentacaoController@atualizar");
 });
+Route::group(["prefix" => "empresa"], function () {
+    Route::get("/{id}/editar", "EmpresaController@editarView");
+    Route::get("/{id}/excluir", "EmpresaController@excluir");
+    Route::get("/", "EmpresaController@index");
+    Route::get("/novo", "EmpresaController@novoView");
+    Route::post("/salvar", "EmpresaController@salvar");
+    Route::post("/atualizar", "EmpresaController@atualizar");
+});
 
 
