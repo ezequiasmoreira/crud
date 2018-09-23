@@ -36,6 +36,12 @@ class MovimentacaoController extends Controller
         ]);
     }
     public function salvar(Request $request){
+        $quantidade = $request->quantidade;
+        $produto_id = $request->id_produto;
+        $tipo       = $request->tipo;
+
+        $sinal = ($tipo == 'E')?'+':'-';
+        $this->atualizaProduto($quantidade,$produto_id,$tipo);
         $movimentacao = Movimentacao::create($request->all());
         return redirect("/movimentacao")->with("message", "movimentacao criada com sucesso!");
     }
@@ -56,6 +62,11 @@ class MovimentacaoController extends Controller
     public function excluir($id) {
         $this->getMovimentacao($id)->delete();
         return redirect(url('movimentacao'))->with('success', 'Excluído!');
+    }
+    protected function atualizaProduto($saldo,$id,$tipo)  {
+        $sinal = ($tipo == 'E')?'+':'-';
+        $sql = "UPDATE produto SET saldo = saldo ".$sinal." :paramSaldo where produto.id =:paramId";
+        $resultSet = DB::update($sql,[$saldo,$id]);
     }
     protected function getMovimentacao($id)  {
         return $this->movimentacao->find($id);
