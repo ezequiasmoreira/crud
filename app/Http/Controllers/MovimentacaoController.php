@@ -18,10 +18,10 @@ class MovimentacaoController extends Controller
     }
 
     public function index(){
-        $sql = "SELECT movimentacao.*,entidade.nome nome_entidade, produto.descricao descricao_produto FROM movimentacao
-                INNER JOIN entidade on (movimentacao.id_entidade = entidade.id)
-                INNER JOIN produto on (movimentacao.id_produto = produto.id)
-                ORDER BY movimentacao.data";
+        $sql = "SELECT movimentacao.*, empresa.razao_social, produto.descricao descricao_produto
+                FROM movimentacao INNER JOIN produto on (movimentacao.id_produto = produto.id)
+                INNER JOIN empresa on (movimentacao.id_entidade = empresa.id)
+                ORDER BY movimentacao.data LIMIT 14";
         $resultSet = DB::select($sql);
         return view('movimentacao.index', [
             'movimentacoes' => $resultSet

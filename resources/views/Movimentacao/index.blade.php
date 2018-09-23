@@ -27,7 +27,7 @@
                     <td><?php echo $movimentacao->tipo ?></td>
                     <td align="center"><?php echo $movimentacao->descricao_produto ?></td>
                     <td align="center"><?php echo $movimentacao->quantidade ?></td>
-                    <td align="center"><?php echo $movimentacao->nome_entidade ?></td>
+                    <td align="center"><?php echo $movimentacao->razao_social ?></td>
                     <td align="center">
                         <?php echo date('d/m/Y', strtotime($movimentacao->data)); ?>
                     </td>
