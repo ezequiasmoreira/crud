@@ -23,9 +23,6 @@ class RelatorioVendaController extends Controller
         return $pdf->stream('vendas.pdf');
         // return $pdf->dawnload('produto.relatorio.vendas.pdf')
      }
-    function processar(Request $request){
 
-        //relatorioProduto($request);
-    }
 
 }
