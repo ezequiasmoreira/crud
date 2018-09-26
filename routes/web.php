@@ -4,10 +4,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(["prefix" => "produto"], function () {
+Route::group(["prefix" => "produto", 'namespace' => 'Relatorio'], function () {
+//Route::group(['middleware' => ['web']], function () {
     Route::get("/{id}/editar", "ProdutoController@editarView");
     Route::get("/{id}/excluir", "ProdutoController@excluir");
     Route::get("/", "ProdutoController@index");
+    Route::post("/processar", "RelatorioVendaController@relatorioProduto");
+    Route::get("/vendas", "RelatorioVendaController@novoView");
     Route::get("/novo", "ProdutoController@create");
     Route::post("/salvar", "ProdutoController@salvar");
     Route::post("/atualizar", "ProdutoController@atualizar");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Produto;
+use PDF;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -43,6 +44,14 @@ class ProdutoController extends Controller
     public function excluir($id) {
         $this->getProduto($id)->delete();
         return redirect(url('produto'))->with('success', 'Excluído!');
+    }
+    //relatórios
+    public function relatorioProduto(){
+
+       $data = ['dado'=>'ola'];
+        $pdf = PDF::loadView('produto.relatorio.vendas', $data);
+        return $pdf->stream('produto.relatorio.vendas.pdf');
+       // return $pdf->dawnload('produto.relatorio.vendas.pdf')
     }
     protected function getProduto($id)  {
         return $this->produto->find($id);

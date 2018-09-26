@@ -41,7 +41,7 @@
                             <a href="#">Relatórios <span class="arrow"></span></a>
                         </li>
                         <ul class="sub-menu collapse" id="service">
-                            <li>Produto</li>
+                            <li><a href= {{url('produto/relatorio/vendas')}}>Vendas</a></li>
                             <li>Identidade</li>
                             <li>Movimentação</li>
                         </ul>
