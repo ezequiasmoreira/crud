@@ -10,9 +10,9 @@
         </div>
         <div class="form-group">
             <label for="data-inicial" width="5%">data inicial:</label>
-            <input type="date" class="form-control" id="data-inicial"  name="dataInicial" width="40%">
+            <input type="date" class="form-control" id="data_inicial"  name="data_inicial" width="40%">
             <label for="data-final" width="5%">data final:</label>
-            <input type="date" class="form-control" id="data-final"  name="dataFinal" width="40%">
+            <input type="date" class="form-control" id="data_final"  name="data_final" width="40%">
         </div>
         <div class="form-group">
             <label class="radio-inline">
@@ -25,21 +25,22 @@
         <div class="form-group">
             <label>Mostar campos</label>
             <div class="checkbox">
-                <label><input type="checkbox" value="1" name="mostrarCampos">Saldo</label>
+                <label><input type="checkbox" value="1" id="check1"  name="mostrarCampos[]">Saldo</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" value="2" name="mostrarCampos">Descrição do produto</label>
+                <label><input type="checkbox" value="2" id="check2" name="mostrarCampos[]">Descrição do produto</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" value="4" name="mostrarCampos">Status do produto</label>
+                <label><input type="checkbox" value="3"  id="check3" name="mostrarCampos[]">Status do produto</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" value="5" name="mostrarCampos">Valor do produto</label>
+                <label><input type="checkbox" value="4"  id="check4" name="mostrarCampos[]">Valor do produto</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" value="6" name="mostrarCampos">Data de Cadastro</label>
+                <label><input type="checkbox" value="5" id="check5" name="mostrarCampos[]">Data de Cadastro</label>
             </div>
         </div>
+
         <button type="submit" class="btn btn-default">gravar </button>
     </form>
 

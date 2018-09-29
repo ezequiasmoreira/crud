@@ -8,11 +8,27 @@
 
 
 @foreach($relatorioVendas as $relatorioVenda)
-
       <p> {{$relatorioVenda->razao_social }} </p>
+      <p> {{$relatorioVenda->descricao }} </p>
 
 @endforeach
+@foreach($campos as $campo)
+    {{$campo}}
 
+@endforeach
+<p>quantidade de colunas {{$coluna}}</p>
+<p>data de cadastro {{$data}}</p>
+
+
+
+
+
+<?php
+
+
+
+?>
+<h1>Relatório de Vendas</h1>
 <table class="table table-sm">
     <thead>
       <tr>
@@ -21,17 +37,6 @@
         <th scope="col">Cadastrado</th>
         <th scope="col">Saldo</th>
         <th scope="col">Empresa</th>
-        <th scope="col">Descrição</th>
-        <th scope="col">Cadastrado</th>
-        <th scope="col">Saldo</th>
-        <th scope="col">Empresa</th>
-        <th scope="col">Descrição</th>
-        <th scope="col">Cadastrado</th>
-        <th scope="col">Saldo</th>
-        <th scope="col">Empresa</th>
-        <th scope="col">Descrição</th>
-        <th scope="col">Cadastrado</th>
-        <th scope="col">Saldo</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +44,7 @@
         <th scope="row">1</th>
         <td>Mark</td>
         <td>Otto</td>
-        <td>@mdo</td>
+        <td></td>
       </tr>
       <tr>
         <th scope="row">2</th>
@@ -50,7 +55,7 @@
       <tr>
         <th scope="row">3</th>
         <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
