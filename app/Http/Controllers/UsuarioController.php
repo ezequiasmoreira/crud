@@ -21,35 +21,45 @@ class UsuarioController extends Controller
     public function novoView(){
         return view('usuario.create');
     }
+
     public function index($id){
-        $usuario = $this->usuario->find($id);
-        $usuario =  [   'id'    =>  $usuario->id,
-                        'nome'  =>  $usuario->nome
+        $usuarios = $this->usuario->find($id);
+        $usuario =  [   'id'    =>  $usuarios->id,
+                        'nome'  =>  $usuarios->nome
                     ];
         return view('usuario.index',$usuario);
     }
+
     public function validarLogin(Request $request){
 
         $login = $request->login;
 	    $senha = md5($request->senha);
+        $resultSet = $this->getUsuario($login,$senha);
+        if($resultSet){
+            foreach($resultSet as $result){
+                $id     = $result->id;
+                $nome   =$result->nome;
+                $login  =$result->login;
+            }
+            $usuario =  [   'id'    =>  $id,
+                            'nome'  =>  $nome
+                        ];
 
-        $sql = "SELECT * FROM usuario WHERE usuario.login = ? AND usuario.senha = ?";
-        $resultSet = DB::select($sql,[  $login,$senha]);
-        foreach($resultSet as $result){
-            $id     = $result->id;
-            $nome   =$result->nome;
-            $login  =$result->login;
-        }
-        $usuario =  [   'id'    =>  $id,
-                        'nome'  =>  $nome
-                    ];
-
-	    if ($id) {
-            $request->session()->put('usuario_id',$id);
-            return view("/usuario.index",$usuario);
-	    } else {
+            if ($id) {
+                $request->session()->put('usuario_id',$id);
+                return view("/usuario.index",$usuario);
+            } else {
+                return redirect("/");
+            }
+        }else{
             return redirect("/");
+
         }
+    }
+    protected function getUsuario($login,$senha){
+        $sql = "SELECT * FROM usuario WHERE usuario.login = ? AND usuario.senha = ?";
+        $resultSet = DB::select($sql,[ $login,$senha]);
+        return $resultSet;
     }
     public function salvar(Request $request){
         try {
@@ -60,8 +70,16 @@ class UsuarioController extends Controller
 
             $sql = "INSERT INTO usuario
             VALUES (null,?,?,?,null,null)";
-            $request->session()->put('cart','teste');
             $resultSet = DB::insert($sql,[$nome,$login,$senha]);
+
+            $resultSet = $this->getUsuario($login,$senha);
+            foreach($resultSet as $result){
+                $id     = $result->id;
+            }
+            $sql = "INSERT INTO configuracao
+            VALUES (null,null,?,null,null)";
+            $resultSet = DB::insert($sql,[$id]);
+
         }catch(Exception $e){
             return redirect("/admin/novo");
             //echo 'erro: '.$e->getMessage();

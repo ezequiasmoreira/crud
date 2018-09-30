@@ -26,7 +26,7 @@
                 <div class="menu-list">
                     <ul id="menu-content" class="menu-content collapse out">
                         <li>
-                            <a href= {{ url('admin/'.session()->get('usuario_id') )}}>Administração</a>
+                            <a href= {{ url('admin/'.session()->get('usuario_id').'/perfil' )}}>Administração</a>
                         </li>
                         <li  data-toggle="collapse" data-target="#products" class="collapsed active">
                             <a href="#"></i>Cadastros <span class="arrow"></span></a>
