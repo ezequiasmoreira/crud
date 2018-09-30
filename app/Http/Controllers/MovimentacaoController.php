@@ -14,10 +14,12 @@ class MovimentacaoController extends Controller
 
     public function __construct()  {
         $this->movimentacao = new Movimentacao();
-
     }
 
     public function index(){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $sql = "SELECT movimentacao.*, empresa.razao_social, produto.descricao descricao_produto
                 FROM movimentacao INNER JOIN produto on (movimentacao.id_produto = produto.id)
                 INNER JOIN empresa on (movimentacao.id_entidade = empresa.id)
@@ -28,6 +30,9 @@ class MovimentacaoController extends Controller
         ]);
     }
     public function novoView(){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $list_produtos = Produto::all();
         $list_entidades = Entidade::all();
         return view('movimentacao.create',[
@@ -36,6 +41,9 @@ class MovimentacaoController extends Controller
         ]);
     }
     public function salvar(Request $request){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $quantidade = $request->quantidade;
         $produto_id = $request->id_produto;
         $tipo       = $request->tipo;
@@ -46,6 +54,9 @@ class MovimentacaoController extends Controller
         return redirect("/movimentacao")->with("message", "movimentacao criada com sucesso!");
     }
     public function editarView($id) {
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $list_produtos = Produto::all();
         $list_entidades = Entidade::all();
         return view('movimentacao.edit', [
@@ -55,6 +66,9 @@ class MovimentacaoController extends Controller
         ]);
     }
     public function atualizar(Request $request){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $movimentacao = $this->getMovimentacao($request->id);
         $movimentacao->update($request->all());
         return redirect("/movimentacao");

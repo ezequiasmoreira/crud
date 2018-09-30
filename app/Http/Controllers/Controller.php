@@ -10,4 +10,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function validar(){
+        $session = session()->get('usuario_id');
+        if ($session){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

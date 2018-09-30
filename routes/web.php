@@ -42,5 +42,22 @@ Route::group(["prefix" => "empresa"], function () {
     Route::post("/salvar", "EmpresaController@salvar");
     Route::post("/atualizar", "EmpresaController@atualizar");
 });
+Route::group(["prefix" => "pais"], function () {
+    Route::get("/{id}/editar", "PaisController@editarView");
+    Route::get("/{id}/excluir", "PaisController@excluir");
+    Route::get("/", "PaisController@index");
+    Route::get("/novo", "PaisController@novoView");
+    Route::post("/salvar", "PaisController@salvar");
+    Route::post("/atualizar", "PaisController@atualizar");
+});
+Route::group(["prefix" => "admin"], function () {
+   // Route::get("/{id}/editar", "PaisController@editarView");
+    //Route::get("/{id}/excluir", "PaisController@excluir");
+    Route::get("/sair", "UsuarioController@logout");
+    Route::get("/{id}", "UsuarioController@index");
+    Route::get("/novo", "UsuarioController@novoView");
+    Route::post("/salvar", "UsuarioController@salvar");
+    Route::post("/login", "UsuarioController@validarLogin");
+});
 
 

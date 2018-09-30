@@ -5,23 +5,31 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <style type="text/css">
-    .form-login{width: 20%; float: left; margin-left: 40%;}
+    .form-login{width: 50%; float: left; margin-left: 25%;}
     .login{width: 100%; margin-top: 10%;}
     .cadastrar{text-decoration: none; }
 </style>
 <div class="login">
-    <form class="form-login" action= {{url('admin/login')}} method="Post">
+    <form class="form-login" action= {{url('admin/salvar')}} method="Post">
         {{ csrf_field()}}
         <div class="form-group">
-        <label for="email">Email </label>
-        <input type="email" class="form-control" name="login" id="email" aria-describedby="emailHelp" placeholder="Digite o email">
+            <label for="nome">Nome </label>
+            <input type="text" class="form-control" id="nome"  name="nome" placeholder="Digite o nome">
         </div>
         <div class="form-group">
-        <label for="exampleInputPassword1">Senha</label>
-        <input type="password" class="form-control" id="senha" name="senha" placeholder="senha">
+            <label for="email">Email </label>
+            <input type="email" class="form-control" id="email" name="login" aria-describedby="emailHelp" placeholder="Digite o email">
         </div>
-        <button type="submit" class="btn btn-outline-primary btn-sm" >logar</button>
-        <a class="btn btn-outline-primary btn-sm" href= {{ url('admin/novo')}}>Cadastrar</a>
+        <div class="form-group">
+            <label for="senha">Senha </label>
+            <input type="password" class="form-control" id="senha" name="senha" aria-describedby="emailHelp" >
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Confirme sua senha</label>
+            <input type="password" class="form-control" id="senha2" placeholder="Confirme sua senha">
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-sm" >Cadastrar</button>
+        <a class="btn btn-outline-primary btn-sm" href= {{ url('/')}}>Voltar</a>
     </form>
 </div>
 

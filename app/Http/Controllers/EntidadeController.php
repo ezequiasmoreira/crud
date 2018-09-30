@@ -22,16 +22,25 @@ class EntidadeController extends Controller
         ]);
     }
     public function novoView(){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $list_empresas = Empresa::all();
         return view('entidade.create',[
             'empresas' => $list_empresas
         ]);
     }
     public function salvar(Request $request){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $entidade = Entidade::create($request->all());
         return redirect("/entidade")->with("message", "Entidade criada com sucesso!");
     }
     public function editarView($id) {
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $list_empresas = Empresa::all();
         return view('entidade.edit', [
             'entidade' => $this->getEntidade($id),
@@ -39,11 +48,17 @@ class EntidadeController extends Controller
         ]);
     }
     public function atualizar(Request $request){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $entidade = $this->getEntidade($request->id);
         $entidade->update($request->all());
         return redirect("/entidade");
     }
     public function excluir($id) {
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $this->getEntidade($id)->delete();
         return redirect(url('entidade'))->with('success', 'Excluído!');
     }
