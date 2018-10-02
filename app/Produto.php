@@ -10,7 +10,8 @@ class Produto extends Model
         'id',
         'descricao',
         'saldo',
-        'status'
+        'status',
+        'empresa_id',
     ];
     protected $table = 'produto';
 }

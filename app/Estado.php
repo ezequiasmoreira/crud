@@ -9,6 +9,7 @@ class Estado extends Model
     protected $fillable=[
         'id',
         'nome',
+        'sigla',
         //fk
         'pais_id',
         'empresa_id',

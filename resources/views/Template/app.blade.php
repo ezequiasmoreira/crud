@@ -32,10 +32,12 @@
                             <a href="#"></i>Cadastros <span class="arrow"></span></a>
                         </li>
                         <ul class="sub-menu collapse" id="products">
-                            <li class="active"><a href= {{url('produto')}} >Produtos</a></li>
+                            <li><a href= {{url('produto')}} >Produtos</a></li>
                             <li><a href= {{url('entidade')}}>Entidade</a></li>
                             <li><a href= {{url('movimentacao')}}>Movimentação</a></li>
                             <li><a href= {{url('empresa')}}>Empresa</a></li>
+                            <li><a href= {{url('pais')}}>Pais</a></li>
+                            <li><a href= {{url('estado')}}>Estado</a></li>
                         </ul>
                         <li data-toggle="collapse" data-target="#service" class="collapsed">
                             <a href="#">Relatórios <span class="arrow"></span></a>

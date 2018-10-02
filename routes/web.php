@@ -9,7 +9,6 @@ Route::group(["prefix" => "relatorio","namespace" => "Relatorio"], function () {
     Route::get("/vendas", "RelatorioVendaController@novoView");
 });
 Route::group(["prefix" => "produto"], function () {
-//Route::group(['middleware' => ['web']], function () {
     Route::get("/{id}/editar", "ProdutoController@editarView");
     Route::get("/{id}/excluir", "ProdutoController@excluir");
     Route::get("/", "ProdutoController@index");
@@ -50,17 +49,19 @@ Route::group(["prefix" => "pais"], function () {
     Route::post("/salvar", "PaisController@salvar");
     Route::post("/atualizar", "PaisController@atualizar");
 });
+Route::group(["prefix" => "estado"], function () {
+    Route::get("/{id}/editar", "EstadoController@editarView");
+    Route::get("/{id}/excluir", "EstadoController@excluir");
+    Route::get("/", "EstadoController@index");
+    Route::get("/novo", "EstadoController@novoView");
+    Route::post("/salvar", "EstadoController@salvar");
+    Route::post("/atualizar", "EstadoController@atualizar");
+});
 Route::group(["prefix" => "configuracao"], function () {
-    //Route::get("/{id}/editar", "PaisController@editarView");
-    //Route::get("/{id}/excluir", "PaisController@excluir");
     Route::get("/", "ConfiguracaoController@index");
-    //Route::get("/novo", "PaisController@novoView");
-    //Route::post("/salvar", "PaisController@salvar");
     Route::post("/atualizar", "ConfiguracaoController@atualizar");
 });
 Route::group(["prefix" => "admin"], function () {
-   // Route::get("/{id}/editar", "PaisController@editarView");
-    //Route::get("/{id}/excluir", "PaisController@excluir");
     Route::get("/sair", "UsuarioController@logout");
     Route::get("/{id}/perfil", "UsuarioController@index");
     Route::get("/novo", "UsuarioController@novoView");

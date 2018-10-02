@@ -28,7 +28,7 @@ class ConfiguracaoController extends Controller
         foreach($resultSet as $result){
             $id = $result->id;
         }
-        $list_configuracao = $this->configuracao->find(34);
+        $list_configuracao = $this->configuracao->find($id);
         $list_empresas      = Empresa::all();
        return view('configuracao.edit', [
             'configuracao' => $list_configuracao,

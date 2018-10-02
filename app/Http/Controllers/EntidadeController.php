@@ -14,6 +14,9 @@ class EntidadeController extends Controller
     }
 
     public function index(){
+        if(!$this->validar()){
+            return Redirect("/");
+        }
         $list_entidades = Entidade::all();
         $list_empresas = Empresa::all();
         return view('entidade.index', [
