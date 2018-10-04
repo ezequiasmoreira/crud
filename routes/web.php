@@ -11,19 +11,18 @@ Route::group(["prefix" => "relatorio","namespace" => "Relatorio"], function () {
 Route::group(["prefix" => "produto"], function () {
     Route::get("/{id}/editar", "ProdutoController@editarView");
     Route::get("/{id}/excluir", "ProdutoController@excluir");
-    Route::get("/", "ProdutoController@index");
-
+    Route::get("/", "ProdutoController@index");  
     Route::get("/novo", "ProdutoController@create");
     Route::post("/salvar", "ProdutoController@salvar");
     Route::post("/atualizar", "ProdutoController@atualizar");
 });
-Route::group(["prefix" => "entidade"], function () {
-    Route::get("/{id}/editar", "EntidadeController@editarView");
-    Route::get("/{id}/excluir", "EntidadeController@excluir");
-    Route::get("/", "EntidadeController@index");
-    Route::get("/novo", "EntidadeController@novoView");
-    Route::post("/salvar", "EntidadeController@salvar");
-    Route::post("/atualizar", "EntidadeController@atualizar");
+Route::group(["prefix" => "cliente"], function () {
+    Route::get("/{id}/editar", "ClienteController@editarView");
+    Route::get("/{id}/excluir", "ClienteController@excluir");
+    Route::get("/", "ClienteController@index");
+    Route::get("/novo", "ClienteController@novoView");
+    Route::post("/salvar", "ClienteController@salvar");
+    Route::post("/atualizar", "ClienteController@atualizar");
 });
 Route::group(["prefix" => "movimentacao"], function () {
     Route::get("/{id}/editar", "MovimentacaoController@editarView");
@@ -41,7 +40,7 @@ Route::group(["prefix" => "empresa"], function () {
     Route::post("/salvar", "EmpresaController@salvar");
     Route::post("/atualizar", "EmpresaController@atualizar");
 });
-Route::group(["prefix" => "pais"], function () {
+Route::group(["prefix" => "pais","namespace" => "localizacao"], function () {
     Route::get("/{id}/editar", "PaisController@editarView");
     Route::get("/{id}/excluir", "PaisController@excluir");
     Route::get("/", "PaisController@index");
@@ -49,7 +48,7 @@ Route::group(["prefix" => "pais"], function () {
     Route::post("/salvar", "PaisController@salvar");
     Route::post("/atualizar", "PaisController@atualizar");
 });
-Route::group(["prefix" => "cidade"], function () {
+Route::group(["prefix" => "cidade","namespace" => "localizacao"], function () {
     Route::get("/{id}/editar", "CidadeController@editarView");
     Route::get("/{id}/excluir", "CidadeController@excluir");
     Route::get("/", "CidadeController@index");
@@ -65,7 +64,7 @@ Route::group(["prefix" => "endereco","namespace" => "localizacao"], function () 
     Route::post("/salvar", "EnderecoController@salvar");
     Route::post("/atualizar", "EnderecoController@atualizar");
 });
-Route::group(["prefix" => "estado"], function () {
+Route::group(["prefix" => "estado","namespace" => "localizacao"], function () {
     Route::get("/{id}/editar", "EstadoController@editarView");
     Route::get("/{id}/excluir", "EstadoController@excluir");
     Route::get("/", "EstadoController@index");

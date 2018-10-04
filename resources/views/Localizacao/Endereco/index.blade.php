@@ -13,7 +13,8 @@
                             <th  width="25%">Rua</th>
                             <th  width="10%">Num</th>
                             <th  width="25%">bairro</th>
-                            <th  width="40%">cidade</th>
+                            <th  width="30%">cidade</th>
+                            <th  width="10%">ação</th>
                         </tr>
                     </thead>
                     <tbody>

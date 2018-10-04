@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Localizacao;
 use App\Estado;
 use App\Cidade;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CidadeController extends Controller
 {
@@ -22,7 +23,7 @@ class CidadeController extends Controller
           $emp = [ 'empresa_id' => $dado->id];
         }
         $list_estados = Cidade::all();
-        return view('cidade.index', [
+        return view('localizacao.cidade.index', [
             'cidades' => $list_estados
 
         ],$emp);
@@ -34,7 +35,7 @@ class CidadeController extends Controller
 
         $list_estados = Cidade::all();
         $list_Estados  = Estado::all();
-        return view('cidade.create', [
+        return view('localizacao.cidade.create', [
             'cidades' => $list_estados,
             'estados'  => $list_Estados
 
@@ -52,7 +53,7 @@ class CidadeController extends Controller
             return Redirect("/");
         }
         $list_Estados  = Estado::all();
-        return view('cidade.edit', [
+        return view('localizacao.cidade.edit', [
             'cidade' => $this->getCidade($id),
             'estados'  => $list_Estados
         ]);
@@ -70,7 +71,7 @@ class CidadeController extends Controller
             return Redirect("/");
         }
         $this->getCidade($id)->delete();
-        return redirect(url('cidade'))->with('success', 'Excluído!');
+        return redirect(url('cidade'));
     }
     protected function getCidade($id)  {
         return $this->cidade->find($id);

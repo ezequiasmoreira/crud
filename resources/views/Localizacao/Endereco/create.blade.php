@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="cliente">Cliente:</label>
-                <select name="cliente_id" class="form-control" id="cliente">
+                <select name="cliente_id" class="form-control" id="cliente" required="">
                     <?php
                         foreach ($clientes as $cliente){?>
                         <option value="<?php echo $cliente->id ?>"><?php echo $cliente->nome ?></option>

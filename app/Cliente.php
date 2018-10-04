@@ -12,7 +12,7 @@ class Cliente extends Model
         'data_cadastro',
         'cpf',
         //fk
-        'endereco_id',
+        'endereco_principal',
         'empresa_id',
         'usuario_id'
     ];

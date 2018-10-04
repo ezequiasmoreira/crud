@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Localizacao;
+use Illuminate\Support\Facades\DB;
 use App\Endereco;
 use App\Cidade;
 use App\Cliente;
@@ -18,8 +19,11 @@ class EnderecoController extends Controller
     public function index(){
         if(!$this->validar()){
             return Redirect("/");
-        }        
-        $list_enderecos = Endereco::all();
+        }
+        $sql = "SELECT endereco.*, cidade.nome AS cidade 
+                FROM endereco INNER JOIN cidade 
+                ON endereco.cidade_id = cidade.id";
+        $list_enderecos = DB::select($sql);        
         return view('localizacao.endereco.index', [
             'enderecos' => $list_enderecos
         ]);
@@ -48,8 +52,13 @@ class EnderecoController extends Controller
         if(!$this->validar()){
             return Redirect("/");
         }
+        $list_enderecos = Endereco::all();        
+        $list_cidades   = Cidade::all();
+        $list_clientes  = Cliente::all();
         return view('localizacao.endereco.edit', [
-            'endereco' => $this->getEndereco($id)
+            'endereco' => $this->getEndereco($id),
+            'cidades'   => $list_cidades,
+            'clientes'  => $list_clientes
         ]);
     }
     public function atualizar(Request $request){

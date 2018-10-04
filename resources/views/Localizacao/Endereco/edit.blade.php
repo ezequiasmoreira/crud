@@ -39,6 +39,18 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <select name="cliente_id" class="form-control" id="cliente">
+                <?php
+                    foreach ($clientes as $cliente){?>
+                    <option value="<?php echo $cliente->id ?>"
+                        <?php echo($cliente->id == $endereco->cliente_id)?"selected":"";?>>
+                        <?php echo $cliente->nome?>
+                    </option>
+                <?php }?>
+            </select>
+        </div>
+        <div class="form-group">
             <input type="hidden" class="form-control" id="empresa_id" value="<?php echo session()->get('empresa_id') ?>" name="empresa_id">
         </div>
         <div class="form-group">

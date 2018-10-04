@@ -32,20 +32,13 @@ class UsuarioController extends Controller
 
     public function validarLogin(Request $request){
 
-        $login = $request->login;
-	    $senha = md5($request->senha);
-        $resultSet = $this->getUsuario($login,$senha);
-        if($resultSet){
+        $login      =   $request->login;
+	$senha      =   md5($request->senha);
+        $resultSet  =   $this->getUsuario($login, $senha);
+        if($resultSet){         
             foreach($resultSet as $result){
-                $id                 = $result->id;
-                $nome               =$result->nome;
-                $login_digitado     =$result->login;
-
-                if(@$request->nome){
-                    if($login_digitado == $login){
-                        return false;
-                    }
-                }
+                $id                 =   $result->id;
+                $nome               =   $result->nome;                
             }
 
             $usuario =  [   'id'    =>  $id,
@@ -59,11 +52,17 @@ class UsuarioController extends Controller
             } else {
                 return redirect("/");
             }
-        }else{
-            $erro = ['mensagem' => "Login ou senha inválida"];
-            return view("welcome",$erro);
-
         }
+        $erro = ['mensagem' => "Login ou senha inválida"];
+        return view("welcome",$erro);        
+    }
+    protected function validarCadastroUsuario($login){
+        $sql = "SELECT * FROM usuario WHERE usuario.login = ?";
+        $resultSet = DB::select($sql,[ $login]);
+        if($resultSet){
+            return false;
+        }
+        return true;
     }
     protected function getUsuario($login,$senha){
         $sql = "SELECT * FROM usuario WHERE usuario.login = ? AND usuario.senha = ?";
@@ -72,10 +71,11 @@ class UsuarioController extends Controller
     }
     public function salvar(Request $request){
         try {
-            if( $this->validarLogin($request)){
+            if(!$this->validarCadastroUsuario($request->login)){
                 $erro = ['mensagem' => "Já existe um usuário com este login"];
                 return view("usuario.create",$erro);
             }
+            
             $senha = md5($request->senha);
             $login = $request->login;
             $nome  = $request->nome;
@@ -95,7 +95,7 @@ class UsuarioController extends Controller
 
         }catch(Exception $e){
             return redirect("/admin/novo");
-            //echo 'erro: '.$e->getMessage();
+            echo 'erro: '.$e->getMessage();
         }
         return redirect("/");
     }

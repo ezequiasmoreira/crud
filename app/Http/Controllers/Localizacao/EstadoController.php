@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Localizacao;
 use App\Estado;
 use App\Pais;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class EstadoController extends Controller
 {
@@ -22,7 +23,7 @@ class EstadoController extends Controller
           $emp = [ 'empresa_id' => $dado->id];
         }
         $list_estados = Estado::all();
-        return view('estado.index', [
+        return view('localizacao.estado.index', [
             'estados' => $list_estados
 
         ],$emp);
@@ -37,7 +38,7 @@ class EstadoController extends Controller
         }
         $list_estados = Estado::all();
         $list_paises  = Pais::all();
-        return view('estado.create', [
+        return view('localizacao.estado.create', [
             'estados' => $list_estados,
             'paises'  => $list_paises
 
@@ -48,14 +49,14 @@ class EstadoController extends Controller
             return Redirect("/");
         }
         $estado = Estado::create($request->all());
-        return redirect("/estado")->with("message", "Estado criado com sucesso!");
+        return redirect("/estado");
     }
     public function editarView($id) {
         if(!$this->validar()){
             return Redirect("/");
         }
         $list_paises  = Pais::all();
-        return view('estado.edit', [
+        return view('localizacao.estado.edit', [
             'estado' => $this->getEstado($id),
             'paises'  => $list_paises
         ]);

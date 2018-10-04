@@ -13,6 +13,7 @@
                             <th  width="5%">Cód</th>
                             <th  width="50%">nome</th>
                             <th  width="5%">sigla</th>
+                            <th  width="10%">ação</th>
                         </tr>
                     </thead>
                     <tbody>

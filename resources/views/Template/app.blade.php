@@ -33,7 +33,7 @@
                         </li>
                         <ul class="sub-menu collapse" id="products">
                             <li><a href= {{url('produto')}} >Produtos</a></li>
-                            <li><a href= {{url('entidade')}}>Entidade</a></li>
+                            <li><a href= {{url('cliente')}}>Cliente</a></li>
                             <li><a href= {{url('movimentacao')}}>Movimentação</a></li>
                             <li><a href= {{url('empresa')}}>Empresa</a></li>
                             <li><a href= {{url('pais')}}>Pais</a></li>

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Localizacao;
 use App\Pais;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PaisController extends Controller
 {
@@ -14,18 +15,18 @@ class PaisController extends Controller
 
     public function index(){
         $list_paises = Pais::all();
-        return view('pais.index', [
+        return view('localizacao.pais.index', [
             'paises' => $list_paises
         ]);
     }
 
     public function novoView(){
-        return view('pais.create');
+        return view('localizacao.pais.create');
     }
 
     public function salvar(Request $request){
         $pais = Pais::create($request->all());
-        return redirect("/pais")->with("message", "Pais criado com sucesso!");
+        return redirect("/pais");
     }
 
     public function atualizar(Request $request){
@@ -35,7 +36,7 @@ class PaisController extends Controller
     }
 
     public function editarView($id) {
-        return view('pais.edit', [
+        return view('localizacao.pais.edit', [
             'pais' => $this->getPais($id)
         ]);
     }
