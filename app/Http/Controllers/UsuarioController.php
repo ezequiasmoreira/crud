@@ -37,22 +37,31 @@ class UsuarioController extends Controller
         $resultSet = $this->getUsuario($login,$senha);
         if($resultSet){
             foreach($resultSet as $result){
-                $id     = $result->id;
-                $nome   =$result->nome;
-                $login  =$result->login;
+                $id                 = $result->id;
+                $nome               =$result->nome;
+                $login_digitado     =$result->login;
+
+                if(@$request->nome){
+                    if($login_digitado == $login){
+                        return false;
+                    }
+                }
             }
+
             $usuario =  [   'id'    =>  $id,
                             'nome'  =>  $nome
                         ];
 
             if ($id) {
                 $request->session()->put('usuario_id',$id);
+                $this-> buscarEmpresa();
                 return view("/usuario.index",$usuario);
             } else {
                 return redirect("/");
             }
         }else{
-            return redirect("/");
+            $erro = ['mensagem' => "Login ou senha inválida"];
+            return view("welcome",$erro);
 
         }
     }
@@ -63,6 +72,10 @@ class UsuarioController extends Controller
     }
     public function salvar(Request $request){
         try {
+            if( $this->validarLogin($request)){
+                $erro = ['mensagem' => "Já existe um usuário com este login"];
+                return view("usuario.create",$erro);
+            }
             $senha = md5($request->senha);
             $login = $request->login;
             $nome  = $request->nome;

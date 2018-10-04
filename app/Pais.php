@@ -10,6 +10,7 @@ class Pais extends Model
         'id',
         'nome',
         'sigla',
+        'empresa_id',
         'usuario_id'
     ];
     protected $table = 'pais';

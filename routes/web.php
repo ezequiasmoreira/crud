@@ -49,6 +49,22 @@ Route::group(["prefix" => "pais"], function () {
     Route::post("/salvar", "PaisController@salvar");
     Route::post("/atualizar", "PaisController@atualizar");
 });
+Route::group(["prefix" => "cidade"], function () {
+    Route::get("/{id}/editar", "CidadeController@editarView");
+    Route::get("/{id}/excluir", "CidadeController@excluir");
+    Route::get("/", "CidadeController@index");
+    Route::get("/novo", "CidadeController@novoView");
+    Route::post("/salvar", "CidadeController@salvar");
+    Route::post("/atualizar", "CidadeController@atualizar");
+});
+Route::group(["prefix" => "endereco","namespace" => "localizacao"], function () {
+    Route::get("/{id}/editar", "EnderecoController@editarView");
+    Route::get("/{id}/excluir", "EnderecoController@excluir");
+    Route::get("/", "EnderecoController@index");
+    Route::get("/novo", "EnderecoController@novoView");
+    Route::post("/salvar", "EnderecoController@salvar");
+    Route::post("/atualizar", "EnderecoController@atualizar");
+});
 Route::group(["prefix" => "estado"], function () {
     Route::get("/{id}/editar", "EstadoController@editarView");
     Route::get("/{id}/excluir", "EstadoController@excluir");

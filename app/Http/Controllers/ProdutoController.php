@@ -17,38 +17,17 @@ class ProdutoController extends Controller
         if(!$this->validar()){
             return Redirect("/");
         }
-        if($empresa = $this->buscarEmpresa()){
-
-            foreach ($empresa as $dado){
-                $emp = [ 'empresa_id' => $dado->id];
-            }
-            $list_produtos = Produto::all();
-            return view('produto.index', [
-                'produtos'      => $list_produtos
-            ],$emp);
-        }else{
-            $erro = [   'codigo'    => 0,
-                        'descricao' => 'Não há empresa definidida não configuração padrão Adminstração/Configuração'
-                    ];
-            return view('configuracao.erro', $erro);
-        }
+        $list_produtos = Produto::all();
+        return view('produto.index', [
+            'produtos'      => $list_produtos
+        ]);
     }
 
     public function create(){
         if(!$this->validar()){
             return Redirect("/");
         }
-        if($empresa = $this->buscarEmpresa()){
-            foreach ($empresa as $dado){
-                $emp = [ 'empresa_id' => $dado->id];
-            }
-            return view('produto.create',$emp);
-        }else{
-            $erro = [   'codigo'    => 0,
-                        'descricao' => 'Não há empresa definidida não configuração padrão Adminstração/Configuraçã'
-                    ];
-            return view('configuracao.erro', $erro);
-        }
+        return view('produto.create');
     }
 
     public function salvar(Request $request){
@@ -73,19 +52,9 @@ class ProdutoController extends Controller
         if(!$this->validar()){
             return Redirect("/");
         }
-        if($empresa = $this->buscarEmpresa()){
-            foreach ($empresa as $dado){
-                $emp = [ 'empresa_id' => $dado->id];
-            }
-            return view('produto.edit', [
-                'produto' => $this->getProduto($id)
-            ],$emp);
-        }else{
-            $erro = [   'codigo'    => 0,
-                        'descricao' => 'Não há empresa definidida não configuração padrão Adminstração/Configuraçã'
-                    ];
-            return view('configuracao.erro', $erro);
-        }
+        return view('produto.edit', [
+            'produto' => $this->getProduto($id)
+        ]);
     }
 
     public function excluir($id) {

@@ -27,6 +27,14 @@ class Controller extends BaseController
         on (configuracao.empresa_padrao = empresa.id)
         WHERE configuracao.usuario_id = ?";
         $resultSet = DB::select($sql,[$id]);
+        if($resultSet){
+            foreach($resultSet as $result){
+                $id = $result->id;
+            }
+            session()->put('empresa_id',$id);
+        }else{
+            session()->put('empresa_id',0);
+        }
         return $resultSet;
     }
 }

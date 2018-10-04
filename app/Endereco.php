@@ -15,6 +15,7 @@ class Endereco extends Model
         'cep',
         //fk
         'cidade_id',
+        'cliente_id',
         'empresa_id',
         'usuario_id'
     ];

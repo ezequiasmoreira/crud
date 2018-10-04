@@ -11,6 +11,7 @@
 </style>
 <div class="login">
     <form class="form-login" action= {{url('admin/login')}} method="Post">
+        <?php echo (@$mensagem)?"<h6 align='center'>".$mensagem."</h6>":""; ?>
         {{ csrf_field()}}
         <div class="form-group">
         <label for="email">Email </label>

@@ -14,7 +14,7 @@
             <input type="text" class="form-control" id="saldo" value="<?php echo $produto->saldo ?>" name="saldo">
         </div>
         <div class="form-group">
-            <input type="hidden" class="form-control" id="empresa_id" value= {{ $empresa_id}} name="empresa_id">
+            <input type="hidden" class="form-control" id="empresa_id" value="<?php echo session()->get('empresa_id') ?>" name="empresa_id">
         </div>
         <div class="form-group">
             <input type="hidden" class="form-control" id="usuario_id" value="<?php echo session()->get('usuario_id') ?>" name="usuario_id">

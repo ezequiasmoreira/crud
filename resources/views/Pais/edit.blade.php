@@ -14,6 +14,9 @@
             <input type="text" class="form-control" id="sigla" value='<?php echo $pais->sigla ?>' name="sigla">
         </div>
         <div class="form-group">
+            <input type="hidden" class="form-control" id="empresa_id" value="<?php echo session()->get('empresa_id') ?>" name="empresa_id">
+        </div>
+        <div class="form-group">
             <input type="hidden" class="form-control" id="usuario_id" value="1" name="usuario_id">
         </div>
         <input type="submit" value="Alterar pais" class="btn">

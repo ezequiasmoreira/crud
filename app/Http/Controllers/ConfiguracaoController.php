@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Configuracao;
 use App\Empresa;
 use Illuminate\Http\Request;
-
+//10572361
 class ConfiguracaoController extends Controller
 {
     private $configuracao;
@@ -30,6 +30,7 @@ class ConfiguracaoController extends Controller
         }
         $list_configuracao = $this->configuracao->find($id);
         $list_empresas      = Empresa::all();
+        $this-> buscarEmpresa();
        return view('configuracao.edit', [
             'configuracao' => $list_configuracao,
             'empresas'      => $list_empresas

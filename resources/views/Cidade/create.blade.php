@@ -1,23 +1,19 @@
 @extends("template.app")
 @section("content")
 <div class="container">
-        <h2>Cadastro de estado</h2>
-        <form action= {{ url("estado/salvar") }} method="Post">
+        <h2>Cadastro de cidade</h2>
+        <form action= {{ url("cidade/salvar") }} method="Post">
             {{ csrf_field()}}
             <div class="form-group">
-                <label for="nome">nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="estado" name="nome">
-             </div>
-            <div class="form-group">
-                <label for="sigla">sigla:</label>
-                <input type="text" class="form-control" id="sigla" placeholder="sigla" name="sigla">
+                <label for="descricao">nome:</label>
+                <input type="text" class="form-control" id="nome" placeholder="cidade" name="nome">
             </div>
             <div class="form-group">
-                <label for="pais">Pais:</label>
-                <select name="pais_id" class="form-control" id="pais">
+                <label for="estado">Estado:</label>
+                <select name="estado_id" class="form-control" id="estado">
                     <?php
-                        foreach ($paises as $pais){?>
-                        <option value="<?php echo $pais->id ?>"><?php echo $pais->nome." - ".$pais->sigla ?></option>
+                        foreach ($estados as $estado){?>
+                        <option value="<?php echo $estado->id ?>"><?php echo $estado->nome." - ".$estado->sigla ?></option>
                     <?php }?>
                 </select>
             </div>

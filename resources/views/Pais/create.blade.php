@@ -13,7 +13,10 @@
                 <input type="text" class="form-control" id="sigla" placeholder="sigla" name="sigla">
              </div>
             <div class="form-group">
-                <input type="hidden" class="form-control" id="usuario_id" value="1" name="usuario_id">
+                <input type="hidden" class="form-control" id="empresa_id" value="<?php echo session()->get('empresa_id') ?>" name="empresa_id">
+            </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="usuario_id" value="<?php echo session()->get('usuario_id') ?>" name="usuario_id">
             </div>
             <button type="submit" class="btn btn-default">Cadastrar</button>
         </form>

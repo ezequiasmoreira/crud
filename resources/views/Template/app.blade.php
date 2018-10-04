@@ -38,6 +38,8 @@
                             <li><a href= {{url('empresa')}}>Empresa</a></li>
                             <li><a href= {{url('pais')}}>Pais</a></li>
                             <li><a href= {{url('estado')}}>Estado</a></li>
+                            <li><a href= {{url('cidade')}}>Cidade</a></li>
+                            <li><a href= {{url('endereco')}}>Endereço</a></li>
                         </ul>
                         <li data-toggle="collapse" data-target="#service" class="collapsed">
                             <a href="#">Relatórios <span class="arrow"></span></a>
