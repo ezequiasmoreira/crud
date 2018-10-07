@@ -35,10 +35,10 @@ class UsuarioController extends Controller
         $login      =   $request->login;
 	$senha      =   md5($request->senha);
         $resultSet  =   $this->getUsuario($login, $senha);
-        if($resultSet){         
+        if($resultSet){
             foreach($resultSet as $result){
                 $id                 =   $result->id;
-                $nome               =   $result->nome;                
+                $nome               =   $result->nome;
             }
 
             $usuario =  [   'id'    =>  $id,
@@ -54,7 +54,7 @@ class UsuarioController extends Controller
             }
         }
         $erro = ['mensagem' => "Login ou senha inválida"];
-        return view("welcome",$erro);        
+        return view("welcome",$erro);
     }
     protected function validarCadastroUsuario($login){
         $sql = "SELECT * FROM usuario WHERE usuario.login = ?";
@@ -75,7 +75,7 @@ class UsuarioController extends Controller
                 $erro = ['mensagem' => "Já existe um usuário com este login"];
                 return view("usuario.create",$erro);
             }
-            
+
             $senha = md5($request->senha);
             $login = $request->login;
             $nome  = $request->nome;
