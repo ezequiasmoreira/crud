@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use App\Endereco;
 use App\Cliente;
 use App\Cidade;
+use App\Estado;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -17,6 +19,11 @@ class ClienteController extends Controller
     protected $except = [
         'stripe/*',
     ];
+    public function retornaCidade(Request $request){
+        $list_cidades = DB::table('cidade')->where('estado_id','=', $request->estado_id)->get();
+        $obj    =   ['cidades'  =>  $list_cidades];
+        return $list_cidades;
+    }
     public function index(){
         if(!$this->validar()){
             return Redirect("/");
@@ -33,9 +40,11 @@ class ClienteController extends Controller
             return Redirect("/");
         }
         //$list_enderecos = DB::table('endereco')->where('cliente_id', 100)->get();
-        $list_cidades = Cidade::all();
+        $list_cidades   = Cidade::all();
+        $list_estados  = Estado::all();
         return view('cliente.create',[
-            'cidades' => $list_cidades
+            'cidades'   =>  $list_cidades,
+            'estados'   =>  $list_estados
         ]);
     }
     public function salvar(Request $request){

@@ -23,6 +23,7 @@ Route::group(["prefix" => "cliente"], function () {
     Route::get("/novo", "ClienteController@novoView");
     Route::post("/salvar", "ClienteController@salvar");
     Route::post("/atualizar", "ClienteController@atualizar");
+    Route::post("/retorna-cidade", "ClienteController@retornaCidade");
 });
 Route::group(["prefix" => "movimentacao"], function () {
     Route::get("/{id}/editar", "MovimentacaoController@editarView");
