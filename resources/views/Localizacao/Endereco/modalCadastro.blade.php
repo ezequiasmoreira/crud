@@ -28,15 +28,15 @@
                             <th style="text-align:left">Numero</th>
                         </tr>                        
                         <tr>
-                            <td><div class="form-group"><input type="text" class="form-control" id="rua" placeholder="rua" name="rua"></div></td>
-                            <th><div class="form-group"><input type="text" class="form-control" id="numero" placeholder="número" name="numero"></div></th>
+                            <td><div class="form-group"><input type="text" class="form-control" id="rua" placeholder="rua" name="rua" required></div></td>
+                            <th><div class="form-group"><input type="text" class="form-control" id="numero" placeholder="número" name="numero" required></div></th>
                         </tr>
                         <tr>
                             <th width="70%" style="text-align:left">Bairro</th>                        
                             <th style="text-align:left">Complemento:</th>
                         </tr>
                         <tr>
-                            <th><div class="form-group"><input type="text" class="form-control" id="bairro" placeholder="bairro" name="bairro"></div></th>
+                            <th><div class="form-group"><input type="text" class="form-control" id="bairro" placeholder="bairro" name="bairro" required></div></th>
                             <th><div class="form-group"><input type="text" class="form-control" id="complemento" placeholder="complemento" name="complemento"></div></th>
                         <tr>
                     </table>
@@ -55,16 +55,17 @@
                             <th><div class="form-group"><input type="text" class="form-control" id="cep" placeholder="cep" name="cep"></div></th>
                             <th><div class="form-group">
                                     <select name="estado_id" class="form-control" id="estado">
+                                        <option value="0">Selecione um estado</option>
                                     <?php if(@$estados){
                                         foreach ($estados as $estado){?>
-                                        <option value="<?php echo $estado->id ?>"><?php echo $estado->sigla." - ".$estado->nome ?></option>
+                                        <option class="removeEstados" value="<?php echo $estado->id ?>"><?php echo $estado->sigla." - ".$estado->nome ?></option>
                                     <?php }}?>
                                     </select>
                             </div></th>
                             <th><div class="form-group">
-                                    <select name="cidade_id" class="form-control" id="cidade">                                        
+                                    <select name="cidade_id" class="form-control" id="cidade" required>                                        
                                     </select>
-                            </div></th>
+                            </div></th> 
                         </tr>                        
                     </table>
                     </div>                    
@@ -73,50 +74,9 @@
             </div>       
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-default">Cadastrar</button>
+            <button type="button" id="cadastrarEndereco" class="btn btn-default">Cadastrar</button>
         </div>
     </div>        
-    </div>
-    </div>
- </div>
-
-<script type="text/javascript">
- window.onload = function(){ 
-    
-    $(document).ready(function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-       $("#estado").on('change', function(){
-            
-            var estado  = $('#estado').val();
-            var token   = $("input[type=hidden][name=_token]").val();
-            
-            $.ajax({
-                type:"post",
-                url:"{!! URL::to('cliente/retorna-cidade') !!}",
-                dataType: 'JSON',
-                data: {
-                    "estado_id": estado, 
-                    '_token': token
-                },
-                success:function(data){  
-                    $(".remove").each(function() {
-                        $(this).remove();
-                    });
-                    for (var i = 0; i < data.length; i++) { 
-                        var id      = data[i].id;
-                        var nome    = data[i].nome;                                          
-                        $('#cidade').append("<option class='remove' value="+id+">"+nome+"</option>");                   
-                    }
-                },
-                error:function(){                    
-                        alert("Ocorreu algum problema entre em contato como suporte");                    
-                },
-            });
-       });
-    });
-   }
-</script>
+</div>
+</div>
+</div>

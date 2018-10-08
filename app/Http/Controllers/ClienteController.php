@@ -52,13 +52,13 @@ class ClienteController extends Controller
             return Redirect("/");
         }
         $cliente = New Cliente();
-        $cliente ->nome = $request->nome;
-        $cliente ->cpf = $request->cpf;
-        $cliente ->data_cadastro = $request->data_cadastro;
-        $cliente ->empresa_id = $request->empresa_id;
-        $cliente ->usuario_id = $request->usuario_id;
+        $cliente ->nome                 = $request->nome;
+        $cliente ->cpf                  = $request->cpf;
+        $cliente ->data_cadastro        = $request->data_cadastro;
+        $cliente ->endereco_principal   = $request->endereco_principal;
+        $cliente ->empresa_id           = $request->empresa_id;
+        $cliente ->usuario_id           = $request->usuario_id;
         $cliente->save();
-        //return redirect("/cliente");
         return $cliente;
     }
     
@@ -68,7 +68,7 @@ class ClienteController extends Controller
         }
         $list_enderecos = Endereco::all();
         return view('cliente.edit', [
-            'cliente' => $this->getCliente($id),
+            'cliente'   => $this->getCliente($id),
             'enderecos' =>  $list_enderecos
         ]);
     }

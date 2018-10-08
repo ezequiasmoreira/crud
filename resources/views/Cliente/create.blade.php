@@ -30,7 +30,7 @@
           <select name="endereco_principal" class="form-control" id="endereco_principal" style="width:50%; float:left;">
               <?php if (@$enderecos){ 
                   foreach (@$enderecos as $endereco){?>
-                  <option value="<?php echo @$endereco->id ?>"><?php echo @$endereco->rua.' - '.$endereco->numero.' - '.$endereco->cep ?></option>
+                  <option  value="<?php echo @$endereco->id ?>"><?php echo @$endereco->rua.' - '.$endereco->numero.' - '.$endereco->cep ?></option>
               <?php }}?>
           </select>
               
@@ -45,7 +45,7 @@
             <input type="hidden" class="form-control" id="usuario_id" value="<?php echo session()->get('usuario_id') ?>" name="usuario_id">
         </div>
 
-        <button type="button" id='cadastrar' class="btn btn-default">Cadastrar</button>
+        <button type="button" id='cadastrarCliente' class="btn btn-default">Cadastrar</button>
     </form>
       
     </div>
@@ -58,8 +58,44 @@
 </div>
 @include('localizacao.endereco.modalCadastro') '
 @endsection
-<script type="text/javascript">
- window.onload = function(){ 
+
+<script  type="text/javascript" >
+window.onload = function(){ 
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+       $("#estado").on('change', function(){
+            
+            var estado  = $('#estado').val();
+            var token   = $("input[type=hidden][name=_token]").val();
+            
+            $.ajax({
+                type:"post",
+                url:"{!! URL::to('cliente/retorna-cidade') !!}",
+                dataType: 'JSON',
+                data: {
+                    "estado_id": estado, 
+                    '_token': token
+                },
+                success:function(data){  
+                    $(".removeCidades").each(function() {
+                        $(this).remove();
+                    });
+                    for (var i = 0; i < data.length; i++) { 
+                        var id      = data[i].id;
+                        var nome    = data[i].nome;                                          
+                        $('#cidade').append("<option class='removeCidades' value="+id+">"+nome+"</option>");                   
+                    }
+                },
+                error:function(){                    
+                        alert("Ocorreu algum problema entre em contato como suporte");                    
+                },
+            });
+       });
+    });   
     
     $(document).ready(function(){
         $.ajaxSetup({
@@ -68,14 +104,24 @@
             }
         });
 
-       $("#cadastrar").on('click', function(){
-           
-            
-            var nome            = $('#nome').val();
-            var cpf             = $('#cpf').val();
-            var data_cadastro   = $('#data_cadastro').val();
-            var empresa_id      = $('#empresa_id').val();
-            var usuario_id      = $('#usuario_id').val();       
+        $("#cadastrarCliente").on('click', function(){            
+            var nome                = $('#nome').val();
+            var cpf                 = $('#cpf').val();
+            var data_cadastro       = $('#data_cadastro').val();
+            var endereco_principal  = $('#endereco_principal').val(); 
+            var empresa_id          = $('#empresa_id').val();
+            var usuario_id          = $('#usuario_id').val(); 
+            var token               = $("input[type=hidden][name=_token]").val();
+            if (($('#nome').val() == "")){
+                alert("nome obrigatório");
+                $('#nome').focus();
+                return false;
+            }
+            if (($('#cpf').val() == "")){
+                alert("cpf obrigatório");
+                $('#cpf').focus();
+                return false;
+            }
             $.ajax({
                 type:"post",
                 url:"{!! URL::to('cliente/salvar') !!}",
@@ -84,28 +130,112 @@
                     "nome": nome,
                     "cpf":cpf,
                     "data_cadastro":data_cadastro,
+                    "endereco_principal":endereco_principal,
                     "empresa_id":empresa_id,
                     "usuario_id":usuario_id,
-                    '_token': "7DqxQLvYHps8EEJsdOPk49eg0aeShTvFR0eMPJPZ"
+                    '_token': token
                 },
-                success:function(data){
-                    if(!data.id){
-                        $('.endereco').prop('href','');
-                    }               
-                    alert('Sucesso');
+                success:function(data){                                 
+                    alert('Cliente Cadastrado com sucesso');
+                    $(".removeEndereco").each(function() {
+                        $(this).remove();
+                    });
+                    $('#nome').val("");
+                    $('#cpf').val("");                    
                 },
                 error:function(){
-                    if (($('#nome').val() == "")){
-                        alert("nome obrigatório");
-                    }
-                    if (($('#cpf').val() == "")){
-                        alert("cpf obrigatório");
-                    }
+                   
+                    alert("erro");
                 },
-            });
-       });
+            });             
+        });
     });
-   }
+     
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $("#cadastrarEndereco").on('click', function(){
+            var rua         = $('#rua').val();
+            var numero      = $('#numero').val();
+            var bairro      = $('#bairro').val();
+            var cep         = $('#cep').val();
+            var complemento = $('#complemento').val();
+            var estado      = $('#estado').val();
+            var cidade      = $('#cidade').val();
+            var empresa_id  = $('#empresa_id').val();
+            var usuario_id  = $('#usuario_id').val();
+            var token   = $("input[type=hidden][name=_token]").val();
+            if (($('#rua').val() == "")){
+                alert("rua obrigatório");
+                $('#rua').focus();
+                return false;
+            }
+            if (($('#numero').val() == "")){
+                alert("numero obrigatório");
+                $('#numero').focus();
+                return false;
+            }
+            if (($('#bairro').val() == "")){
+                alert("bairro obrigatório");
+                $('#bairro').focus();
+                return false;
+            }
+            if (($('#cep').val() == "")){
+                alert("cep obrigatório");
+                $('#cep').focus();
+                return false;
+            }
+            if (($('#estado').val() == "0")){
+                alert("estado obrigatório");
+                $('#estado').focus();
+                return false;
+            }
+            $.ajax({
+                type:"post",
+                url:"{!! URL::to('endereco/salvar-json') !!}",
+                dataType: 'JSON',
+                data: {
+                        'rua':rua,         
+                        'numero':numero,    
+                        'bairro':bairro,      
+                        'cep':cep ,        
+                        'complemento':complemento, 
+                        'estado':estado,      
+                        'cidade':cidade,      
+                        'empresa_id':empresa_id,
+                        'usuario_id':usuario_id,
+                        '_token': token
+                },
+                success:function(data){                    
+                    if(data){ 
+                        $(".removeEstados").each(function() {
+                            $(this).remove();
+                        });
+                        $(".removeCidades").each(function() {
+                            $(this).remove();
+                        });                        
+                        for(var i = 0; i<data[1].length; i++){
+                            $('#estado').append("<option class='removeEstados' value="+data[1][i].id+">"+data[1][i].sigla+" - "+data[1][i].nome+"</option>");
+                        }
+                        $('#endereco_principal').append("<option class='removeEndereco' value="+data[0].id+">"+data[0].rua+","+data[0].numero+"</option>");
+                        alert("Endereço cadastrado com sucesso");
+                        $('#rua').val("");      
+                        $('#numero').val("");
+                        $('#bairro').val("");
+                        $('#cep').val("");
+                        $('#complemento').val("");
+                    } 
+                },
+                error:function(){
+                    alert("Ops, ocorreu algum problema , entre em contato com o suporte");
+                },
+            }); 
+        });
+    });
+}
 </script>
  
 

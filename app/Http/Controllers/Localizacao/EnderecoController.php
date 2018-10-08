@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Localizacao;
 use Illuminate\Support\Facades\DB;
 use App\Endereco;
 use App\Cidade;
+use App\Estado;
 use App\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,25 @@ class EnderecoController extends Controller
 
     public function __construct()  {
         $this->endereco = new Endereco();
+    }
+    public function salvarJson(Request $request){
+         if(!$this->validar()){
+            return Redirect("/");
+        }
+        $endereco = New Endereco();
+        $endereco ->rua         = $request->rua;
+        $endereco ->numero      = $request->numero;
+        $endereco ->bairro      = $request->bairro;
+        $endereco ->complemento = $request->complemento;
+        $endereco ->cep         = $request->cep;
+        $endereco ->cidade_id   = $request->cidade;
+        $endereco ->empresa_id  = $request->empresa_id;
+        $endereco ->usuario_id  = $request->usuario_id;        
+        $endereco->save();
+        $list_estados  = Estado::all();
+        $obj    =   [$endereco,$list_estados];
+        return $obj;
+        
     }
 
     public function index(){

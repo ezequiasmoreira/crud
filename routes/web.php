@@ -63,6 +63,7 @@ Route::group(["prefix" => "endereco","namespace" => "localizacao"], function () 
     Route::get("/", "EnderecoController@index");
     Route::get("/novo", "EnderecoController@novoView");
     Route::post("/salvar", "EnderecoController@salvar");
+    Route::post("/salvar-json", "EnderecoController@salvarJson");
     Route::post("/atualizar", "EnderecoController@atualizar");
 });
 Route::group(["prefix" => "estado","namespace" => "localizacao"], function () {
