@@ -57,6 +57,14 @@ Route::group(["prefix" => "cargo","namespace" => "pessoa"], function () {
     Route::post("/salvar", "CargoController@salvar");
     Route::post("/atualizar", "CargoController@atualizar");
 });
+Route::group(["prefix" => "funcionario","namespace" => "pessoa"], function () {
+    Route::get("/{id}/editar", "FuncionarioController@editarView");
+    Route::get("/{id}/excluir", "FuncionarioController@excluir");
+    Route::get("/", "FuncionarioController@index");
+    Route::get("/novo", "FuncionarioController@novoView");
+    Route::post("/salvar", "FuncionarioController@salvar");
+    Route::post("/atualizar", "FuncionarioController@atualizar");
+});
 Route::group(["prefix" => "cidade","namespace" => "localizacao"], function () {
     Route::get("/{id}/editar", "CidadeController@editarView");
     Route::get("/{id}/excluir", "CidadeController@excluir");

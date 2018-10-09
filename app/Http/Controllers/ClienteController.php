@@ -50,16 +50,39 @@ class ClienteController extends Controller
     public function salvar(Request $request){
        if(!$this->validar()){
             return Redirect("/");
+       }
+        $endereco = New Endereco();
+        
+        foreach ($request->endereco as $key => $value) {
+            switch ($key) {
+                case  'rua'     : $endereco->rua    = $value; break;
+                case  'numero'  : $endereco->numero = $value; break;
+                case  'bairro'  : $endereco->bairro = $value; break;
+                case  'complemento'  : $endereco->complemento = $value; break;
+                case  'cep'  : $endereco->cep = $value; break;
+                case  'cidade'  : $endereco->cidade_id = $value; break;
+                case  'empresa_id'  : $endereco->empresa_id = $value; break;
+                case  'usuario_id'  : $endereco->usuario_id = $value; break;               
+                default:
+                break;
+            }
         }
+        $endereco->save();      
+        
         $cliente = New Cliente();
         $cliente ->nome                 = $request->nome;
         $cliente ->cpf                  = $request->cpf;
         $cliente ->data_cadastro        = $request->data_cadastro;
-        $cliente ->endereco_principal   = $request->endereco_principal;
+        $cliente ->endereco_principal   = $endereco->id;
         $cliente ->empresa_id           = $request->empresa_id;
-        $cliente ->usuario_id           = $request->usuario_id;
+        $cliente ->usuario_id           = $request->usuario_id;        
         $cliente->save();
-        return $cliente;
+        $list_estados = Estado::all();
+        $obj =  ['cliente'    => $cliente,
+                'endereco'  => $endereco,
+                'estados'   => $list_estados
+        ];
+        return $obj;
     }
     
     public function editarView($id) {
